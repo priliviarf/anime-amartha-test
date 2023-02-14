@@ -1,4 +1,5 @@
 import { Pagination as BTPagination } from 'react-bootstrap';
+
 const Pagination = ({ pagination }) => {
   if (!pagination) return null;
 

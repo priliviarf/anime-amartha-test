@@ -1,37 +1,62 @@
 import { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
-const Search = ({ onSearch }) => {
+const Search = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSearch = () => {
-    onSearch();
-    handleClose();
-  };
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Search here
+        Search
       </Button>
 
       <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Search Anime</Modal.Title>
+        </Modal.Header>
         <Modal.Body>
-          <Modal.Title>Modal heading</Modal.Title>
-          <div>Woohoo, you're reading this text in a modal!</div>
+          <Form>
+            <Form.Group className="mb-3" controlId="genres">
+              <Form.Label>Genres</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
 
-          <Button variant="primary" onClick={handleSearch}>
-            Search
-          </Button>
+            <div className="row">
+              <div className="col-6">
+                <Form.Group className="mb-3" controlId="type">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Select aria-label="type">
+                    <option value="tv">TV</option>
+                    <option value="movie">Movie</option>
+                    <option value="music">Music</option>
+                  </Form.Select>
+                </Form.Group>
+              </div>
+              <div className="col-6">
+                <Form.Group className="mb-3" controlId="status">
+                  <Form.Label>Status</Form.Label>
+                  <Form.Select aria-label="status">
+                    <option value="airing">Airing</option>
+                    <option value="complete">Complete</option>
+                    <option value="upcoming">Upcoming</option>
+                  </Form.Select>
+                </Form.Group>
+              </div>
+            </div>
+
+            <Form.Group className="mb-3" controlId="producers">
+              <Form.Label>Producers</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+
+            <Button variant="primary" onClick={handleClose}>
+              Search
+            </Button>
+          </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
