@@ -1,3 +1,8 @@
-.element {
-  color: black;
+.card-wrapper {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }

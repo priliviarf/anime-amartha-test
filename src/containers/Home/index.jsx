@@ -1,38 +1,54 @@
+import { useRef } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { Card, Search } from '../../components';
+import { Card, Offcanvas, Search } from '../../components';
 import { endpoints } from '../../configuration';
 import { useAxios } from '../../hooks';
 
 const Home = () => {
   const { data, loaded } = useAxios(endpoints.getAnimes, 'get');
 
-  return (
-    <div className="container pt-5">
-      <div className="row">
-        <div className="col-8">
-          <h2>Watch Popular Anime Here!</h2>
-        </div>
-        <div className="col-4">
-          <Search onSearch={() => {}} />
-        </div>
-      </div>
+  const offcanvasRef = useRef();
 
-      <div className="pt-5">
-        {!loaded ? (
-          <Spinner></Spinner>
-        ) : (
-          <>
-            <div className="row">
-              {data?.data?.map((anime, key) => (
-                <div key={key} className="col-2 mb-3">
-                  <Card anime={anime} />
-                </div>
-              ))}
-            </div>
-          </>
-        )}
+  const showDetail = (anime) => {
+    offcanvasRef.current?.setDataShow(anime);
+    offcanvasRef.current?.handleShow();
+  };
+
+  return (
+    <>
+      <Offcanvas ref={offcanvasRef} />
+
+      <div className="container pt-5">
+        <div className="header">
+          <div>
+            <h2>Watch Popular Anime Here!</h2>
+          </div>
+          <div>
+            <Search onSearch={() => {}} />
+          </div>
+        </div>
+
+        <div className="pt-5">
+          {!loaded ? (
+            <Spinner></Spinner>
+          ) : (
+            <>
+              <div className="row">
+                {data?.data?.map((anime, key) => (
+                  <div
+                    onClick={() => showDetail(anime)}
+                    className="card-wrapper col-sm-12 col-md-6 col-lg-3 mb-3"
+                    key={key}
+                  >
+                    <Card anime={anime} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
