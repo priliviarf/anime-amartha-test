@@ -18,14 +18,13 @@ const routes = [
   },
   {
     path: paths.nomatch,
-    element: <div>Not Found</div>,
-    // element: (
-    //   <PublicRoute>
-    //     <Loadable>
-    //       <div>Not Found</div>
-    //     </Loadable>
-    //   </PublicRoute>
-    // ),
+    element: (
+      <PublicRoute>
+        <Loadable>
+          <div>Not Found</div>
+        </Loadable>
+      </PublicRoute>
+    ),
   },
 ];
 

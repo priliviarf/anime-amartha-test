@@ -17,5 +17,3 @@ const Element = (_p, ref) => {
 };
 
 export default forwardRef(Element);
-
-// coba ini dipindah ke components nya app, lalu dikasih context-provider seperti react-next
